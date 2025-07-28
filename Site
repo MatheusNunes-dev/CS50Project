@@ -1,0 +1,26 @@
+Ideia Incial:
+Criar um site onde o funcionario da empresa possa ver informacoes dos clientes
+Nele ele tambem podera registrar novos clientes
+Tera uma lista dos clientes, quando clicar em algum exibira informacoes do mesmo e probabilidade de churn
+Nessa Lista tera filtros
+
+
+Dados do cliente que serao preenchidos:
+Tenure
+PreferredLoginDevice
+CityTier	
+WarehouseToHome	
+PreferredPaymentMode	
+Gender	
+HourSpendOnApp	
+NumberOfDeviceRegistered	
+PreferedOrderCat	
+SatisfactionScore	
+MaritalStatus	
+NumberOfAddress	
+Complain	
+OrderAmountHikeFromlastYear	
+CouponUsed	
+OrderCount	
+DaySinceLastOrder	
+CashbackAmount

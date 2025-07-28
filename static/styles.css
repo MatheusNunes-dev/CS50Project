@@ -1,0 +1,15 @@
+.container{
+    max-width: 80%;
+}
+
+.register-information{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+.register-information.active{
+    display: flex;
+    opacity: 1;    
+}
