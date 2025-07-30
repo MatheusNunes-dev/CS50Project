@@ -1,0 +1,244 @@
+/* === ESTILOS ESPECÍFICOS PARA TELA DE DETALHES DO CLIENTE === */
+
+/* Header do cliente */
+.client-header .card-body {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.client-avatar {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.client-name {
+    color: #212529;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+/* Inputs no header do cliente */
+.client-name-input {
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    padding: 0;
+    width: 100%;
+    outline: none;
+}
+
+.client-name-input:focus {
+    border: 1px solid #28a745;
+    background: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.client-info-input {
+    border: none;
+    background: transparent;
+    color: inherit;
+    width: auto;
+    min-width: 200px;
+    padding: 0;
+    outline: none;
+}
+
+.client-info-input:focus {
+    border: 1px solid #28a745;
+    background: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+/* Status do cliente */
+.client-status .badge {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.badge-churn-yes {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.badge-churn-no {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.client-rating {
+    font-size: 1.1rem;
+}
+
+/* Items de detalhes */
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f3f4;
+    transition: all 0.3s ease;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item:hover {
+    background: rgba(40, 167, 69, 0.05);
+    margin: 0 -15px;
+    padding: 12px 15px;
+    border-radius: 8px;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    min-width: 40%;
+}
+
+/* Inputs e selects dos detalhes */
+.detail-value-input,
+.detail-value-select {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: #212529;
+    font-weight: 500;
+    text-align: right;
+    max-width: 60%;
+    outline: none;
+    width: auto;
+    min-width: 80px;
+}
+
+.detail-value-select {
+    cursor: pointer;
+}
+
+.detail-value-input:focus,
+.detail-value-select:focus {
+    border: 1px solid #28a745;
+    background: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.detail-value-input:disabled,
+.detail-value-select:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+/* Cards de detalhes com altura uniforme */
+.custom-card.h-100 {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-card.h-100 .card-body {
+    flex: 1;
+}
+
+/* Botão salvar (inicialmente oculto) */
+.btn-saveDetails {
+    display: none;
+}
+
+/* Estado de edição */
+.editing .detail-value-input,
+.editing .detail-value-select {
+    background: #fafbfc;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.editing .client-name-input,
+.editing .client-info-input {
+    background: #fafbfc;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.editing .btn-saveDetails {
+    display: inline-block;
+}
+
+/* Responsividade para detalhes */
+@media (max-width: 768px) {
+    .client-avatar {
+        font-size: 3rem;
+    }
+    
+    .client-name {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .client-header .col-md-4 {
+        text-align: center !important;
+        margin-top: 20px;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .detail-label {
+        min-width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .detail-value-input,
+    .detail-value-select {
+        text-align: left;
+        max-width: 100%;
+        width: 100%;
+        margin-top: 5px;
+        font-weight: 400;
+    }
+    
+    .client-info-input {
+        min-width: 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .client-header .row {
+        text-align: center;
+    }
+    
+    .client-header .col-md-6 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+/* Animação suave para mudanças de estado */
+.detail-value-input,
+.detail-value-select,
+.client-name-input,
+.client-info-input {
+    transition: all 0.3s ease;
+}
+
+/* Melhorias visuais para inputs em foco */
+.detail-value-input:focus,
+.detail-value-select:focus,
+.client-name-input:focus,
+.client-info-input:focus {
+    transform: translateY(-1px);
+}

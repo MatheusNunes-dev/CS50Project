@@ -1,15 +1,368 @@
-.container{
-    max-width: 80%;
+/* Reset e configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.register-information{
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #ececec 0%, #cccecf 100%);
+    min-height: 100vh;
+    color: #212529;
+}
+
+/* Header personalizado */
+.custom-navbar {
+    background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+    border-bottom: none;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Sidebar */
+.sidebar {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+    padding: 0;
+    margin-bottom: 20px;
+    min-height: calc(100vh - 120px);
+    border: 1px solid #e9ecef;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+}
+
+.sidebar .nav-link {
+    color: #6c757d;
+    padding: 15px 20px;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background: #f8f9fa;
+    color: #28a745;
+    transform: translateX(5px);
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+/* Header da página */
+.page-header {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.page-title {
+    color: #212529;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* Botões personalizados */
+.custom-btn-register {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.custom-btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    color: white;
+}
+
+
+.custom-btn-remove {
+    background: linear-gradient(135deg, #a75028 0%, #c23b12 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(226, 18, 11, 0.295);
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.custom-btn-remove:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(226, 18, 11, 0.295);
+    background: linear-gradient(135deg, #a75028 0%, #c23b12 100%);
+    color: white;
+}
+
+
+
+
+
+
+.custom-btn-submit {
+    background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 30px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(52, 58, 64, 0.3);
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.custom-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 58, 64, 0.4);
+    background: linear-gradient(135deg, #212529 0%, #000000 100%);
+    color: white;
+}
+
+.custom-btn-details {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.custom-btn-details:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+/* Cards personalizados */
+.custom-card {
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-radius: 20px 20px 0 0 !important;
+    border: none;
+    padding: 20px 25px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+
+.register-information {
     display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    justify-content: center;
 }
 
+.form-section {
+    border-bottom: 2px solid #f1f3f4;
+    padding-bottom: 20px;
+}
 
-.register-information.active{
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #28a745;
+    display: inline-block;
+}
+
+.custom-input {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 12px 15px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+.custom-input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    background: white;
+    transform: translateY(-1px);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+/* Tabela personalizada */
+.custom-table {
+    background: white;
+}
+
+.custom-table thead tr {
+    background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+    color: white;
+}
+
+.custom-table thead th {
+    border: none;
+    padding: 20px 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.custom-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.custom-table tbody tr:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.custom-table tbody td {
+    padding: 20px 15px;
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+/* Avatar na tabela */
+.avatar {
+    font-size: 2rem;
+    color: #28a745;
+}
+
+/* Badge personalizado */
+.badge-tenure {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Rating */
+.rating {
     display: flex;
-    opacity: 1;    
+    align-items: center;
 }
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.custom-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-bottom: 20px;
+    }
+    
+    .page-header {
+        text-align: center;
+    }
+    
+    .custom-btn-register {
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .form-section {
+        margin-bottom: 25px;
+    }
+    
+    .custom-table {
+        font-size: 0.9rem;
+    }
+    
+    .avatar {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    
+    .sidebar {
+        min-height: auto;
+    }
+    
+    .page-header {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Efeitos de hover adicionais */
+.form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.form-select.custom-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2328a745' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Loading states */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
