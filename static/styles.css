@@ -182,11 +182,11 @@ body {
     padding: 30px;
 }
 
-
 .register-information {
-    display: none;
     justify-content: center;
+    width: 80%;
 }
+
 
 .form-section {
     border-bottom: 2px solid #f1f3f4;
@@ -366,3 +366,19 @@ body {
     cursor: not-allowed;
 }
 
+
+.register-information input {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(75, 75, 75);
+}
+
+.register-information select {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(75, 75, 75);
+}
+
+.cities{
+    display: none;
+}

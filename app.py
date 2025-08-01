@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import db
 import sqlite3
 import pandas as pd
@@ -61,9 +61,10 @@ attributes = [
 
 @app.route("/")
 def index():
-    keys_list = ["id", "name", "Tenure", "SatisfactionScore"]
+    keys_list = ["id", "name", "Tenure", "SatisfactionScore", "pred_churn" ]
     clients_list = []
     clients = db.search_clients()
+    print(clients)
     for client in clients:
         index_key = 0 
         datas = {}
@@ -123,3 +124,34 @@ def delete_client():
     id = request.form.get("id_delete")
     db.delete_client(id)
     return redirect("/")
+
+
+@app.route('/client_registration')
+def client_registration():
+    return render_template('client_registration.html')
+
+
+@app.route('/churn')
+def info_churn():
+    keys_dict = ["name", "email", "phone", "prob_churn"]
+    clients_high_proba_list = []
+    total_clients, churn_predicts = db.get_details_churns()
+    clients_high_proba = db.get_clients_high_proba()
+    for person in clients_high_proba:
+        clients_high_proba_dict = {}
+        index_key = 0
+        for data in person:
+            clients_high_proba_dict[keys_dict[index_key]] = data
+            index_key += 1
+        clients_high_proba_list.append(clients_high_proba_dict)    
+        
+    return render_template("/churn.html", total_clients = total_clients, churn_predicts = churn_predicts, 
+                            clients_high_proba_list = clients_high_proba_list
+                            )
+
+
+@app.route("/city_datas")
+def city_datas():
+    city_1, city_2, city_3 = db.get_details_city()
+    cities = [city_3, city_2, city_1]
+    return jsonify({'values' : cities})

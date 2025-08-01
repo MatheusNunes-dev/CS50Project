@@ -10,7 +10,7 @@ features = model["features"]
 def search_clients():
     with sqlite3.connect("database.db") as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT id, name, Tenure, SatisfactionScore  FROM Clientes")
+        cursor.execute("SELECT id, name, Tenure, SatisfactionScore, pred_churn  FROM Clientes")
         return cursor.fetchall()
     
 def insert_client(client_data):
@@ -161,7 +161,34 @@ def get_churn(datas):
 def get_churn_df(df):
     df_db = df.copy()
     predict =  pipeline_model.predict(df[features])
-    proba =  pipeline_model.predict_proba(df[features])
-    df_db["pred_churn"] = predict[0]
-    df_db["prob_churn"] = proba[0][1]
+    proba =  pipeline_model.predict_proba(df[features])[:, 1]
+    df_db["pred_churn"] = predict
+    df_db["prob_churn"] = proba
+    df_db["prob_churn"] = df_db["prob_churn"].apply(lambda x: format(x, ".6f"))
     return df_db
+
+def get_details_churns():
+    with sqlite3.connect("database.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(id) FROM Clientes")
+        total_clients = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM Clientes WHERE pred_churn = 1")
+        churn_predicts = cursor.fetchone()[0]
+        return total_clients, churn_predicts
+
+def get_details_city():
+    with sqlite3.connect("database.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(CityTier) FROM Clientes WHERE CityTier = 1 AND pred_churn = 1")
+        city_1 = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(CityTier) FROM Clientes WHERE CityTier = 2 AND pred_churn = 1")
+        city_2 = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(CityTier) FROM Clientes WHERE CityTier = 3 AND pred_churn = 1")
+        city_3 = cursor.fetchone()[0]
+        return city_1, city_2, city_3
+    
+def get_clients_high_proba():
+        with sqlite3.connect("database.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT name, email, phone, prob_churn FROM Clientes ORDER BY prob_churn DESC LIMIT 10")
+            return cursor.fetchall()

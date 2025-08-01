@@ -1,6 +1,3 @@
-/* === ESTILOS ESPECÍFICOS PARA TELA DE DETALHES DO CLIENTE === */
-
-/* Header do cliente */
 .client-header .card-body {
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
@@ -17,7 +14,6 @@
     font-size: 1.8rem;
 }
 
-/* Inputs no header do cliente */
 .client-name-input {
     border: none;
     background: transparent;
@@ -53,7 +49,6 @@
     padding: 2px 6px;
 }
 
-/* Status do cliente */
 .client-status .badge {
     font-size: 0.9rem;
     padding: 8px 15px;
@@ -74,7 +69,6 @@
     font-size: 1.1rem;
 }
 
-/* Items de detalhes */
 .detail-item {
     display: flex;
     justify-content: space-between;
@@ -104,7 +98,6 @@
     min-width: 40%;
 }
 
-/* Inputs e selects dos detalhes */
 .detail-value-input,
 .detail-value-select {
     border: none;
@@ -138,7 +131,6 @@
     opacity: 1;
 }
 
-/* Cards de detalhes com altura uniforme */
 .custom-card.h-100 {
     display: flex;
     flex-direction: column;
@@ -148,12 +140,10 @@
     flex: 1;
 }
 
-/* Botão salvar (inicialmente oculto) */
 .btn-saveDetails {
     display: none;
 }
 
-/* Estado de edição */
 .editing .detail-value-input,
 .editing .detail-value-select {
     background: #fafbfc;
@@ -174,7 +164,6 @@
     display: inline-block;
 }
 
-/* Responsividade para detalhes */
 @media (max-width: 768px) {
     .client-avatar {
         font-size: 3rem;
@@ -227,7 +216,6 @@
     }
 }
 
-/* Animação suave para mudanças de estado */
 .detail-value-input,
 .detail-value-select,
 .client-name-input,
@@ -235,7 +223,6 @@
     transition: all 0.3s ease;
 }
 
-/* Melhorias visuais para inputs em foco */
 .detail-value-input:focus,
 .detail-value-select:focus,
 .client-name-input:focus,
