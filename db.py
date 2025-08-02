@@ -1,7 +1,6 @@
 import sqlite3
 import pandas as pd
 import numpy as np
-from joblib import load
 from typing import Dict, List, Tuple, Optional
 
 DATABASE_PATH = "database.db"
@@ -11,6 +10,7 @@ MODEL_PATH = "ecommerce_pipeline.pkl"
 model_data = pd.read_pickle(MODEL_PATH)
 pipeline_model = model_data["Model"]
 model_features = model_data["features"]
+
 
 
 
