@@ -1,4 +1,4 @@
-fetch("/city_datas")
+fetch("/city_churn_data")
   .then(res => res.json())
   .then(({ values }) => {
     const data = {

@@ -5,8 +5,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-
-attributes_db = [
+ALL_DATABASE_COLUMNS = [
     "id",
     "name",
     "Tenure",
@@ -17,7 +16,7 @@ attributes_db = [
     "Gender",	
     "HourSpendOnApp",	
     "NumberOfDeviceRegistered",	
-    "PreferedOrderCat",	
+    "PreferedOrderCat",  
     "SatisfactionScore",	
     "MaritalStatus",	
     "NumberOfAddress",	
@@ -33,7 +32,8 @@ attributes_db = [
     "pred_churn"
 ]
 
-attributes = [
+
+USER_INPUT_COLUMNS = [
     "name",
     "Tenure",
     "PreferredLoginDevice",
@@ -43,7 +43,7 @@ attributes = [
     "Gender",	
     "HourSpendOnApp",	
     "NumberOfDeviceRegistered",	
-    "PreferedOrderCat",	
+    "PreferedOrderCat", 
     "SatisfactionScore",	
     "MaritalStatus",	
     "NumberOfAddress",	
@@ -57,79 +57,75 @@ attributes = [
     "phone"
 ]
 
-
-
 @app.route("/")
 def index():
-    keys = ["id", "name", "Tenure", "SatisfactionScore", "pred_churn" ]
-    clients = db.search_clients()
-    clients_list = [dict(zip(keys, client)) for client in clients]
-    return render_template("index.html", clients = clients_list)
-
+    display_columns = ["id", "name", "Tenure", "SatisfactionScore", "pred_churn"]
+    client_records = db.search_clients()
+    clients_data = [dict(zip(display_columns, client)) for client in client_records]
+    return render_template("index.html", clients=clients_data)
 
 @app.route("/register_client", methods=['GET', 'POST'])
 def register_client():
-    client_data = {field: request.form.get(field) for field in attributes}
-    db.insert_client(client_data)
+    form_data = {field: request.form.get(field) for field in USER_INPUT_COLUMNS}
+    db.insert_client(form_data)
+    print(form_data)
     return redirect("/")
 
-
-@app.route("/updateDetails", methods=["GET","POST"])
-def updateDetails():
-    client_data = {field: request.form.get(field) for field in attributes_db}
-    id = client_data["id"]
-    client_data.pop("id")
-    db.update_details(id, client_data )
+@app.route("/update_client_details", methods=["GET","POST"])
+def update_client_details():
+    form_data = {field: request.form.get(field) for field in ALL_DATABASE_COLUMNS}
+    client_id = form_data["id"]
+    form_data.pop("id")
+    db.update_client_details(client_id, form_data)
     return redirect("/")
-
 
 @app.route("/details_client", methods=["GET", "POST"])
-def details_client():
-    id_client = request.args.get("id_client")
-    details = db.get_details(id_client)
-    dict_details = [dict(zip(attributes_db, detail)) for detail in details]
-    return render_template("details_client.html", details = dict_details)
+def show_client_details():
+    client_id = request.args.get("id_client")
+    client_details = db.get_client_details(client_id)
+    client_data = dict(zip(ALL_DATABASE_COLUMNS, client_details[0]))
+    return render_template("details_client.html", details=client_data)
 
 @app.route("/delete_all_clients", methods=["GET", "POST"])
 def delete_all_clients():
     db.delete_all_clients()
     return redirect("/")
 
-@app.route("/upload_df", methods=["GET", "POST"])
-def upload_df():
+@app.route("/upload_dataframe", methods=["GET", "POST"])
+def upload_excel_file():
     if request.method == "POST":
-        file = request.files["df_file"]
-        df =  pd.read_excel(file, engine='openpyxl')
-        db.insert_df(df)
+        uploaded_file = request.files["df_file"]
+        dataframe = pd.read_excel(uploaded_file, engine='openpyxl')
+        db.insert_dataframe(dataframe)
     return redirect("/")
-
 
 @app.route("/delete_client", methods=["GET", "POST"])
-def delete_client():
-    id = request.form.get("id_delete")
-    db.delete_client(id)
+def delete_single_client():
+    client_id = request.form.get("id_delete")
+    db.delete_client(client_id)
     return redirect("/")
 
-
 @app.route('/client_registration')
-def client_registration():
+def show_client_registration():
     return render_template('client_registration.html')
 
+@app.route('/churn_analysis')
+def show_churn_analysis():
+    churn_display_columns = ["name", "email", "phone", "prob_churn"]
+    total_clients_count, predicted_churn_count = db.predict_churn_statistics()
+    high_risk_clients = db.get_high_risk_clients()
+    high_risk_clients_data = [dict(zip(churn_display_columns, client)) for client in high_risk_clients]
+    print(high_risk_clients_data)
+    return render_template("churn.html", 
+                         total_clients=total_clients_count, 
+                         churn_predicts=predicted_churn_count,
+                         clients_high_proba_list=high_risk_clients_data)
 
-@app.route('/churn')
-def info_churn():
-    keys = ["name", "email", "phone", "prob_churn"]
-    clients_high_proba_list = []
-    total_clients, churn_predicts = db.get_details_churns()
-    clients_high_proba = db.get_clients_high_proba()
-    clients_high_proba_list = [dict(zip(keys, client)) for client in clients_high_proba]
-    return render_template("/churn.html", total_clients = total_clients, churn_predicts = churn_predicts, 
-                            clients_high_proba_list = clients_high_proba_list
-                            )
+@app.route("/city_churn_data")
+def get_city_churn_data():
+    tier1_churn, tier2_churn, tier3_churn = db.get_city_churn_statistics()
+    city_churn_counts = [tier3_churn, tier2_churn, tier1_churn]
+    return jsonify({'values': city_churn_counts})
 
-
-@app.route("/city_datas")
-def city_datas():
-    city_1, city_2, city_3 = db.get_details_city()
-    cities = [city_3, city_2, city_1]
-    return jsonify({'values' : cities})
+if __name__ == '__main__':
+    app.run()

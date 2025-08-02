@@ -19,5 +19,6 @@ function open_home(){
 }
 
 function open_churn(){
-    window.location.href = "/churn"
+    window.location.href = "/churn_analysis"
 }
+

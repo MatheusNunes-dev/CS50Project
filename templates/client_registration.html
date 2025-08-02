@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
     <title>Client Registration</title>
 </head>
 <body>
@@ -164,9 +164,8 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label for="orderCat" class="form-label">Preferred Category</label>
-                                            <small class="text-muted d-block mb-1">Preferred order category last month</small>
-                                            <select class="custom-input" id="Preferred" name="Preferred Category">
-                                                <option value="Fasion">Fashion</option>
+                                            <select class="custom-input" id="Preferred" name="PreferedOrderCat">
+                                                <option value="Fashion">Fashion</option>
                                                 <option value="Grocery">Grocery</option>
                                                 <option value="Laptop & Accessory">Laptop & Accessory</option>
                                                 <option value="Mobile Phone">Mobile Phone</option>
@@ -192,13 +191,11 @@
                                     </div>
                                 </div>
 
-                                <!-- Financial -->
                                 <div class="form-section mb-4">
                                     <h6 class="section-title">Financial Information</h6>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
-                                            <label for="hike" class="form-label">Order Amount Increase (%)</label>
-                                            <small class="text-muted d-block mb-1">% increase in orders from last year</small>
+                                            <label for="hike" class="form-label">Order Amount Increase </label>
                                             <input type="number" class="form-control custom-input" id="hike" name="OrderAmountHikeFromlastYear" min="0">
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -233,6 +230,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/script.js"></script>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>

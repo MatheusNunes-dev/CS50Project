@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/styles.css">
-    <link rel="stylesheet" href="../static/details.css">
-    <title>Detalhes do Cliente</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/details.css">
+    <title>Client Details</title>
 </head>
 <body>
     <div class="container-fluid py-4">
@@ -15,11 +15,11 @@
             <div class="col-md-2">
                 <div class="sidebar">
                     <div class="sidebar-header">
-                        <h5><i class="fas fa-user-circle me-2"></i>Perfil</h5>
+                        <h5><i class="fas fa-user-circle me-2"></i>Profile</h5>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/"><i class="fas fa-home me-2"></i>Início</a>
+                            <a class="nav-link active" href="/"><i class="fas fa-home me-2"></i>Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" onclick="open_churn()"><i class="fas fa-user me-2"></i>Churns</a>
@@ -61,7 +61,7 @@
                                         <span class="badge badge-churn-yes">
                                             <i class="fas fa-exclamation-triangle me-1"></i>Probability: {{ details.prob_churn | float | round(2) }}%
                                         </span>
-                                </div>
+                                    </div>
                                     <div class="client-rating">
                                         {% for i in range( details.SatisfactionScore | int) %}
                                             <i class="fas fa-star text-warning"></i>
@@ -77,38 +77,38 @@
                     </div>
                 </div>
 
-                <form id="form-details" method="POST" action="/updateDetails">
+                <form id="form-details" method="POST" action="/update_client_details">
                     <div class="row">
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
-                                    <h5 class="mb-0"><i class="fas fa-user me-2"></i>Informações Pessoais</h5>
+                                    <h5 class="mb-0"><i class="fas fa-user me-2"></i>Personal Information</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="detail-item">
-                                        <label class="detail-label">Nome:</label>
+                                        <label class="detail-label">Name:</label>
                                         <input type="text" name="name" class="detail-value-input" value="{{ details.name }}" disabled>
                                     </div>
                                     <div class="d-none">
                                         <input type="number" name="id" value="{{ details.id }}">
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Gênero:</label>
+                                        <label class="detail-label">Gender:</label>
                                         <select name="Gender" class="detail-value-select" disabled>
-                                            <option {% if details.Gender == 'Male' %}selected{% endif %} value="Male">Masculino</option>
-                                            <option {% if details.Gender != 'Male' %}selected{% endif %} value="Female">Feminino</option>
+                                            <option {% if details.Gender == 'Male' %}selected{% endif %} value="Male">Male</option>
+                                            <option {% if details.Gender != 'Male' %}selected{% endif %} value="Female">Female</option>
                                         </select>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Estado Civil:</label>
+                                        <label class="detail-label">Marital Status:</label>
                                         <select name="MaritalStatus" class="detail-value-select" disabled>
-                                            <option {% if details.MaritalStatus == 'Single' %}selected{% endif %} value="Single">Solteiro</option>
-                                            <option {% if details.MaritalStatus == 'Married' %}selected{% endif %} value="Married">Casado</option>
-                                            <option {% if details.MaritalStatus == 'Divorced' %}selected{% endif %} value="Divorced">Divorciado</option>
+                                            <option {% if details.MaritalStatus == 'Single' %}selected{% endif %} value="Single">Single</option>
+                                            <option {% if details.MaritalStatus == 'Married' %}selected{% endif %} value="Married">Married</option>
+                                            <option {% if details.MaritalStatus == 'Divorced' %}selected{% endif %} value="Divorced">Divorced</option>
                                         </select>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Tempo de Conta (meses):</label>
+                                        <label class="detail-label">Account Duration (months):</label>
                                         <input type="number" name="Tenure" class="detail-value-input" value="{{ details.Tenure }}" disabled>
                                     </div>
                                     <div class="detail-item">
@@ -116,7 +116,7 @@
                                         <input type="email" name="email" class="detail-value-input" value="{{ details.email }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Telefone:</label>
+                                        <label class="detail-label">Phone:</label>
                                         <input type="tel" name="telefone" class="detail-value-input" value="{{ details.phone }}" disabled>
                                     </div>
                                 </div>
@@ -126,38 +126,38 @@
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
-                                    <h5 class="mb-0"><i class="fas fa-cog me-2"></i>Preferências</h5>
+                                    <h5 class="mb-0"><i class="fas fa-cog me-2"></i>Preferences</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="detail-item">
-                                        <label class="detail-label">Dispositivo Preferido:</label>
+                                        <label class="detail-label">Preferred Device:</label>
                                         <select name="PreferredLoginDevice" class="detail-value-select" disabled>
                                             <option {% if details.PreferredLoginDevice == 'Mobile Phone' %}selected{% endif %} value="Mobile Phone">Mobile</option>
                                             <option {% if details.PreferredLoginDevice == 'Computer' %}selected{% endif %} value="Computer">Computer</option>
                                         </select>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Forma de Pagamento:</label>
+                                        <label class="detail-label">Payment Method:</label>
                                         <select name="PreferredPaymentMode" class="detail-value-select" disabled>
-                                            <option {% if details.PreferredPaymentMode == 'Credit Card' %}selected{% endif %} value="Credit Card">Cartão de Crédito</option>
-                                            <option {% if details.PreferredPaymentMode == 'Cash on Delivery' %}selected{% endif %} value="Cash on Delivery">Dinheiro na Entrega</option>
+                                            <option {% if details.PreferredPaymentMode == 'Credit Card' %}selected{% endif %} value="Credit Card">Credit Card</option>
+                                            <option {% if details.PreferredPaymentMode == 'Cash on Delivery' %}selected{% endif %} value="Cash on Delivery">Cash on Delivery</option>
                                             <option {% if details.PreferredPaymentMode != 'Credit Card' and details.PreferredPaymentMode != 'Cash on Delivery' %}selected{% endif %} value="{{ details.PreferredPaymentMode }}">{{ details.PreferredPaymentMode }}</option>
                                         </select>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Categoria Preferida:</label>
+                                        <label class="detail-label">Preferred Category:</label>
                                         <input type="text" name="PreferedOrderCat" class="detail-value-input" value="{{ details.PreferedOrderCat }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Nível da Cidade:</label>
+                                        <label class="detail-label">City Tier:</label>
                                         <input type="text" name="CityTier" class="detail-value-input" value="{{ details.CityTier }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Distância do Depósito:</label>
+                                        <label class="detail-label">Distance to Warehouse:</label>
                                         <input type="number" name="WarehouseToHome" class="detail-value-input" value="{{ details.WarehouseToHome }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Pontuação de Satisfação:</label>
+                                        <label class="detail-label">Satisfaction Score:</label>
                                         <input type="text" name="SatisfactionScore" class="detail-value-input" value="{{ details.SatisfactionScore }}" disabled>
                                     </div>
                                 </div>
@@ -167,23 +167,23 @@
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
-                                    <h5 class="mb-0"><i class="fas fa-mobile-alt me-2"></i>Uso do Aplicativo</h5>
+                                    <h5 class="mb-0"><i class="fas fa-mobile-alt me-2"></i>App Usage</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="detail-item">
-                                        <label class="detail-label">Horas no App:</label>
+                                        <label class="detail-label">Hours on App:</label>
                                         <input type="number" name="HourSpendOnApp" class="detail-value-input" value="{{ details.HourSpendOnApp }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Dispositivos Registrados:</label>
+                                        <label class="detail-label">Registered Devices:</label>
                                         <input type="number" name="NumberOfDeviceRegistered" class="detail-value-input" value="{{ details.NumberOfDeviceRegistered }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Número de Endereços:</label>
+                                        <label class="detail-label">Number of Addresses:</label>
                                         <input type="number" name="NumberOfAddress" class="detail-value-input" value="{{ details.NumberOfAddress }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Reclamações:</label>
+                                        <label class="detail-label">Complaints:</label>
                                         <input type="number" name="Complain" class="detail-value-input" value="{{ details.Complain }}" disabled>
                                     </div>
                                 </div>
@@ -193,27 +193,27 @@
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
-                                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Histórico de Pedidos</h5>
+                                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Order History</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="detail-item">
-                                        <label class="detail-label">Total de Pedidos:</label>
+                                        <label class="detail-label">Total Orders:</label>
                                         <input type="number" name="OrderCount" class="detail-value-input" value="{{ details.OrderCount }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Dias Último Pedido:</label>
+                                        <label class="detail-label">Days Since Last Order:</label>
                                         <input type="number" name="DaySinceLastOrder" class="detail-value-input" value="{{ details.DaySinceLastOrder }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Aumento nos Gastos:</label>
+                                        <label class="detail-label">Spending Increase:</label>
                                         <input type="number" name="OrderAmountHikeFromlastYear" class="detail-value-input" value="{{ details.OrderAmountHikeFromlastYear }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Cupons Utilizados:</label>
+                                        <label class="detail-label">Coupons Used:</label>
                                         <input type="number" name="CouponUsed" class="detail-value-input" value="{{ details.CouponUsed }}" disabled>
                                     </div>
                                     <div class="detail-item">
-                                        <label class="detail-label">Cashback Acumulado (Reais):</label>
+                                        <label class="detail-label">Cashback Earned (R$):</label>
                                         <input type="number" name="CashbackAmount" class="detail-value-input" value="{{ details.CashbackAmount }}" disabled>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@
                     <div class="row mb-4">
                         <div class="col-12 text-center">
                             <button class="btn custom-btn-submit btn-saveDetails" type="submit">
-                                <i class="fas fa-save me-2"></i>Salvar Alterações
+                                <i class="fas fa-save me-2"></i>Save Changes
                             </button>
                         </div>
                     </div>
@@ -235,14 +235,14 @@
                         <div class="card custom-card">
                             <div class="card-body text-center">
                                 <button class="btn btn-outline-secondary me-3" onclick="window.history.back()">
-                                    <i class="fas fa-arrow-left me-2"></i>Voltar
+                                    <i class="fas fa-arrow-left me-2"></i>Back
                                 </button>
                                 <button class="btn custom-btn-submit me-3" type="button" onclick="editDetails()">
-                                    <i class="fas fa-edit me-2"></i>Editar Cliente
+                                    <i class="fas fa-edit me-2"></i>Edit Client
                                 </button>
                                 <form method="POST" action="/delete_client" class="d-inline">
                                     <button class="btn btn-outline-danger" value="{{ details.id }}" name="id_delete" type="submit">
-                                        <i class="fas fa-trash me-2"></i>Excluir Cliente
+                                        <i class="fas fa-trash me-2"></i>Delete Client
                                     </button>
                                 </form>
                             </div>
@@ -254,34 +254,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/script.js"></script>
-    <script>
-        function toggleRegisterForm() {
-            const clientList = document.querySelector('.client-list-section');
-            const registerForm = document.querySelector('.register-information');
-            const registerButton = document.querySelector('.custom-btn-register');
-            
-            if (registerForm.style.display === 'none' || registerForm.style.display === '') {
-                clientList.classList.add('d-none');
-                registerForm.style.display = 'block';
-                registerButton.style.display = 'none';
-            } else {
-                clientList.classList.remove('d-none');
-                registerForm.style.display = 'none';
-                registerButton.style.display = 'inline-block';
-            }
-        }
-
-        function backToClientList() {
-            toggleRegisterForm();
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const registerForm = document.querySelector('.register-information');
-            if (registerForm) {
-                registerForm.style.display = 'none';
-            }
-        });
-    </script>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>
