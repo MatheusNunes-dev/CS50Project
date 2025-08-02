@@ -29,7 +29,6 @@
             </div>
 
             <div class="col-md-10">
-                <!-- Header do Cliente -->
                 <div class="client-header mb-4">
                     <div class="card custom-card">
                         <div class="card-body p-4">
@@ -80,7 +79,6 @@
 
                 <form id="form-details" method="POST" action="/updateDetails">
                     <div class="row">
-                        <!-- Informações Pessoais -->
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
@@ -125,7 +123,6 @@
                             </div>
                         </div>
 
-                        <!-- Preferências -->
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
@@ -167,7 +164,6 @@
                             </div>
                         </div>
 
-                        <!-- Uso do Aplicativo -->
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
@@ -194,7 +190,6 @@
                             </div>
                         </div>
 
-                        <!-- Histórico de Pedidos -->
                         <div class="col-md-6 mb-4">
                             <div class="card custom-card h-100">
                                 <div class="card-header">
@@ -226,7 +221,6 @@
                         </div>
                     </div>
 
-                    <!-- Botão Salvar (inicialmente oculto) -->
                     <div class="row mb-4">
                         <div class="col-12 text-center">
                             <button class="btn custom-btn-submit btn-saveDetails" type="submit">
@@ -236,7 +230,6 @@
                     </div>
                 </form>
 
-                <!-- Botões de ação -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card custom-card">
@@ -263,31 +256,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../static/script.js"></script>
     <script>
-        // Função para mostrar/ocultar o formulário de cadastro
         function toggleRegisterForm() {
             const clientList = document.querySelector('.client-list-section');
             const registerForm = document.querySelector('.register-information');
             const registerButton = document.querySelector('.custom-btn-register');
             
             if (registerForm.style.display === 'none' || registerForm.style.display === '') {
-                // Mostrar formulário de cadastro
                 clientList.classList.add('d-none');
                 registerForm.style.display = 'block';
                 registerButton.style.display = 'none';
             } else {
-                // Voltar para lista de clientes
                 clientList.classList.remove('d-none');
                 registerForm.style.display = 'none';
                 registerButton.style.display = 'inline-block';
             }
         }
 
-        // Função para voltar à lista de clientes
         function backToClientList() {
             toggleRegisterForm();
         }
 
-        // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
             const registerForm = document.querySelector('.register-information');
             if (registerForm) {

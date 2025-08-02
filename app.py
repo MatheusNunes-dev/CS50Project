@@ -61,18 +61,9 @@ attributes = [
 
 @app.route("/")
 def index():
-    keys_list = ["id", "name", "Tenure", "SatisfactionScore", "pred_churn" ]
-    clients_list = []
+    keys = ["id", "name", "Tenure", "SatisfactionScore", "pred_churn" ]
     clients = db.search_clients()
-    print(clients)
-    for client in clients:
-        index_key = 0 
-        datas = {}
-        for data in client: 
-            datas[keys_list[index_key]] = data
-            index_key += 1
-        clients_list.append(datas)     
-
+    clients_list = [dict(zip(keys, client)) for client in clients]
     return render_template("index.html", clients = clients_list)
 
 
@@ -92,16 +83,11 @@ def updateDetails():
     return redirect("/")
 
 
-@app.route("/datails_client", methods=["GET", "POST"])
-def datails_client():
+@app.route("/details_client", methods=["GET", "POST"])
+def details_client():
     id_client = request.args.get("id_client")
     details = db.get_details(id_client)
-    dict_details = {}
-    for tuple in details:
-        index_key = 0 
-        for data in tuple: 
-            dict_details[attributes_db[index_key]] = data
-            index_key += 1
+    dict_details = [dict(zip(attributes_db, detail)) for detail in details]
     return render_template("details_client.html", details = dict_details)
 
 @app.route("/delete_all_clients", methods=["GET", "POST"])
@@ -115,7 +101,6 @@ def upload_df():
         file = request.files["df_file"]
         df =  pd.read_excel(file, engine='openpyxl')
         db.insert_df(df)
-
     return redirect("/")
 
 
@@ -133,18 +118,11 @@ def client_registration():
 
 @app.route('/churn')
 def info_churn():
-    keys_dict = ["name", "email", "phone", "prob_churn"]
+    keys = ["name", "email", "phone", "prob_churn"]
     clients_high_proba_list = []
     total_clients, churn_predicts = db.get_details_churns()
     clients_high_proba = db.get_clients_high_proba()
-    for person in clients_high_proba:
-        clients_high_proba_dict = {}
-        index_key = 0
-        for data in person:
-            clients_high_proba_dict[keys_dict[index_key]] = data
-            index_key += 1
-        clients_high_proba_list.append(clients_high_proba_dict)    
-        
+    clients_high_proba_list = [dict(zip(keys, client)) for client in clients_high_proba]
     return render_template("/churn.html", total_clients = total_clients, churn_predicts = churn_predicts, 
                             clients_high_proba_list = clients_high_proba_list
                             )
